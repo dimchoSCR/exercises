@@ -67,10 +67,10 @@ object Functions {
   }
 
   def toUpperCase(chars: List[Char]) = {
-    def upperCase(char: Char) ={
+    def upperCase(char: Char) = {
       // Check to see if the char is a lower case letter
-      if(char >= 97 && char<=122) (char - 32).toChar;
-      else "Not a lowercase letter";
+      if(char >= 97 && char <= 122) (char - 32).toChar
+      else char
     }
     
     // Map all lower case chars to upper case chars using map
@@ -84,18 +84,19 @@ object Functions {
   }
 
   // Връща масив съдържащ само елементите отговарящи на f
-  def filter(data: List[Int], f :(Int) => Boolean) = {
-    def innerFilter(data: List[Int], f :(Int) => Boolean,filtered:Array[Int]):Array[Int] = {
-      if(data.isEmpty) filtered;
-      else{
+  // Task 6
+  def filter(data: List[Int], f: (Int) => Boolean) = {
+    def innerFilter(data: List[Int], f: (Int) => Boolean, filtered: List[Int]): List[Int] = {
+      if (data.isEmpty) filtered;
+      else {
         // If the criteria is satisfied the head is inserted into the array 
-        if(f(data.head)) innerFilter(data.tail, f, filtered :+ data.head)
+        if (f(data.head)) innerFilter(data.tail, f, filtered :+ data.head)
         // Continue iterating over data
-        else innerFilter(data.tail,f,filtered);
+        else innerFilter(data.tail, f, filtered);
       }
     }
-    
-    innerFilter(data, f, Array());
+
+    innerFilter(data, f, List());
   }
 
   // Проверява дали всички елементи отговарят на f
