@@ -77,6 +77,7 @@ object StreamsExercise {
     * is equal to the number itself.
     * @example 153 = 1*1*1 + 5*5*5 + 3*3*3
     */
+  lazy val numEqualsPowerOfThree = from(0).filter(el => el == sumOfDigitsPowThree(el));
 
   /**
     * With the growth of the number's number of digits its value grows by 10 and the sum of third powers
@@ -92,25 +93,25 @@ object StreamsExercise {
     * @see do not use 'for' operators, implement it based on the streams of all natural numbers and
     *      find the desired number based on that stream.
     */
-  val capOfDigitsSizeTask1 = ???
+  val capOfDigitsSizeTask1 = from(1).take(10).toList.filter(x => math.pow(10, x) < x * math.pow(9,3) + 1).max + 1;
 
   /**
     * The stream of all numbers which may satisfy the TASK1 (defined above) conditions
     * @see Actually it is a stream computed from a range from 1 to the maximum number of
     *      the calculated capOfDigitsSizeTask1 digits.
     */
-  lazy val rangeStreamTask1 = ???
+  lazy val rangeStreamTask1 = (1 to capOfDigitsSizeTask1 * math.pow(9, 3).toInt).toStream;
 
   /**
     * The stream of all numbers satisfying Task1 condition.
     */
-  lazy val resultStreamTask1 = ???
+  lazy val resultStreamTask1 = rangeStreamTask1.filter(el => el == sumOfDigitsPowThree(el))
 
 
   def main(args: Array[String]): Unit = {
     println("The fifth fibonacci number is " + fibFrom(1,1)(4))
 
-//    println("Task1 numbers are " + resultStreamTask1.toList)
+    println("Task1 numbers are " + resultStreamTask1.toList)
     // the expected result is List(1, 153, 370, 371, 407)
 
   }
